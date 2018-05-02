@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <title>Welcome to Login Page</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <body>
+
+    <iframe style="display: none;" id="account-discovery" src=""></iframe>
+    <script>
+      const domain = location.hostname.split('.').slice(1).join('.');
+      document.getElementById('account-discovery').src = `http://login.${domain}:9876/iframe.html`;
+    </script>
+    <section>
+      <div>
+          <label>Login</label><input id="login" />
+      </div>
+      <div>
+          <label>First Name</label><input id="firstName" />
+      </div>
+      <div>
+          <label>Last Name</label><input id="lastName" />
+      </div>
+      <div>
+          <input type="button" value="Add User" id="addUser" />
+      </div>
+    </section>
+    <script>
+      function addUser(msg) {
+        var iframeEl = document.getElementById('account-discovery');
+        var iframeWin = iframeEl.contentWindow;
+        var origin = iframeEl.src.replace('iframe.html', '');
+        iframeWin.postMessage(msg, origin);
+      }
+
+      document.getElementById('addUser').addEventListener('click', function () {
+        const msg = {
+          type: 'login',
+          displayName: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+          login: document.getElementById('login').value,
+        }
+        addUser(msg);
+      });
+    </script>
+
+  </body>
+</html>

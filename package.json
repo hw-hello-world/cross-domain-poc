@@ -1,0 +1,16 @@
+{
+  "name": "cross-domains-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server src -p 9876 -g -d"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^4.19.1",
+    "http-server": "^0.11.1"
+  }
+}
